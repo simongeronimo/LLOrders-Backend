@@ -1,0 +1,11 @@
+{
+  "name": "llordersbackend",
+  "version": "1.0.0",
+  "description": "Backend API Endpoints",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "SimonGeronimo",
+  "license": "ISC"
+}
