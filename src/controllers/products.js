@@ -22,3 +22,13 @@ export const addProduct = async (req, res) => {
     res.status(200).json({ products: err.stack });
   }
 };
+
+export const updateProductQuantityWithId = async (req, res) => {
+  const { ids, quantities } = req.body;
+  try {
+    const data = await productsModel.updateQuantityWithId(ids, quantities);
+    res.status(200).json({ products: data.rows });
+  } catch (err) {
+    res.status(200).json({ products: err.stack });
+  }
+};

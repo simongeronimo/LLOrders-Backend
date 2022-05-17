@@ -21,6 +21,26 @@ class Model {
       `;
     return this.pool.query(query);
   }
+
+  async updateQuantityWithId(ids, quantities) {
+    let query = `
+    UPDATE ${this.table}
+    SET quantity = CASE id 
+    `;
+    let whereCond = `END
+    WHERE id IN (0`;
+    const idArray = ids.split(",");
+    const quantityArray = quantities.split(",");
+    for (let index = 0; index < idArray.length; index++) {
+      query+=`WHEN ${idArray[index]} THEN ${quantityArray[index]}
+      `;
+      whereCond += `,${idArray[index]}`;
+    }
+    query = query + whereCond + `)
+    RETURNING id;`
+    return this.pool.query(query);
+    
+  }
 }
 
 export default Model;
