@@ -4,9 +4,9 @@ import { modifyEmptyInfo } from '../middleware';
 
 const indexRouter = express.Router();
 
+indexRouter.get('/', indexPage);
 indexRouter.post('/products', modifyEmptyInfo, addProduct);
 indexRouter.post('/saveProducts', updateProductQuantityWithId);
-indexRouter.get('/', indexPage);
 indexRouter.get('/products', productsPage);
 
 

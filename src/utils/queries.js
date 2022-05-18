@@ -2,7 +2,8 @@ export const createProductsTable = `
 DROP TABLE IF EXISTS products;
 CREATE TABLE IF NOT EXISTS products (
   id SERIAL PRIMARY KEY,
-  name VARCHAR DEFAULT '',
+  location INTEGER DEFAULT 0,
+  name VARCHAR NOT NULL,
   info VARCHAR NOT NULL,
   quantity INTEGER DEFAULT 0
   )

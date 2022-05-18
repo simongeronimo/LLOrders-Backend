@@ -4,7 +4,8 @@ const productsModel = new Model('products');
 
 export const productsPage = async (req, res) => {
   try {
-    const data = await productsModel.select('id, name, info, quantity');
+    const { locations } = req.body;
+    const data = await productsModel.select('id, name, info, quantity', locations);
     res.status(200).json({ products: data.rows });
   } catch (err) {
     res.status(200).json({ products: err.stack });

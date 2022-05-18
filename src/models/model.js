@@ -7,9 +7,14 @@ class Model {
     this.pool.on('error', (err, client) => `Error, ${err}, on idle client${client}`);
   }
 
-  async select(columns, clause) {
+  async select(columns, locations) {
+    let whereCond = `WHERE location IN (0`;
+    const locationsArray = locations.split(",");
     let query = `SELECT ${columns} FROM ${this.table}`;
-    if (clause) query += clause;
+    for (let index = 0; index < locationsArray.length; index++) {
+      whereCond += `,${idArray[index]}`;
+    }
+    query = query + whereCond + `)`
     return this.pool.query(query);
   }
 
