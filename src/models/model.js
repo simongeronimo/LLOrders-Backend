@@ -8,11 +8,11 @@ class Model {
   }
 
   async select(columns, locations) {
-    let whereCond = `WHERE location IN (0`;
+    let whereCond = ` WHERE location IN (0`;
     const locationsArray = locations.split(",");
     let query = `SELECT ${columns} FROM ${this.table}`;
     for (let index = 0; index < locationsArray.length; index++) {
-      whereCond += `,${idArray[index]}`;
+      whereCond += `,${locationsArray[index]}`;
     }
     query = query + whereCond + `)`
     return this.pool.query(query);
