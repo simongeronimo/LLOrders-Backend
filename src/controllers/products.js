@@ -8,7 +8,7 @@ export const productsPage = async (req, res) => {
     if(req.body.locations != null){
        locations  = req.body.locations;
     }
-    const data = await productsModel.select('id, name, info, quantity', locations);
+    const data = await productsModel.select('id, name, info, quantity, quantity_case', locations);
     res.status(200).json({ products: data.rows });
   } catch (err) {
     res.status(200).json({ products: err.stack });
@@ -16,9 +16,9 @@ export const productsPage = async (req, res) => {
 };
 
 export const addProduct = async (req, res) => {
-  const { name, info, quantity } = req.body;
-  const columns = 'name, info, quantity';
-  const values = `'${name}', '${info}', '${quantity}'`;
+  const { name, location, info, quantity, quantity_case } = req.body;
+  const columns = 'name, location, info, quantity, quantity_case';
+  const values = `'${name}', '${location}', '${info}', '${quantity}', '${quantity_case}'`;
   try {
     const data = await productsModel.insertWithReturn(columns, values);
     res.status(200).json({ products: data.rows });
@@ -28,9 +28,9 @@ export const addProduct = async (req, res) => {
 };
 
 export const updateProductQuantityWithId = async (req, res) => {
-  const { ids, quantities } = req.body;
+  const { ids, quantities, quantities_case } = req.body;
   try {
-    const data = await productsModel.updateQuantityWithId(ids, quantities);
+    const data = await productsModel.updateQuantityWithId(ids, quantities, quantities_case);
     res.status(200).json({ products: data.rows });
   } catch (err) {
     res.status(200).json({ products: err.stack });
